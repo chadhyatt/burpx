@@ -13,7 +13,13 @@ go install -v github.com/chadhyatt/burpx@latest
 ## Usage
 
 ```
-
+USAGE: burpx [OPTION]...
+  -dup
+    	Writes file paths with duplicate response entries with an _n suffix
+  -i string
+    	Path to the Burp Suite XML sitemap export to extract (default "sitemap.xml")
+  -o string
+    	Base directory for extracted sitemap (default ".")
 ```
 
 ## License
