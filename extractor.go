@@ -65,6 +65,22 @@ func ExtractItems(rt *Root, out string) (err error) {
 
 		path := fixedFilePath(u)
 
+		{
+			dupIdx, ok := dupePathMap[path]
+			if !ok {
+				dupIdx = 0
+			}
+			if dupIdx > 0 {
+				if !*shouldWriteDups {
+					slog.Warn("Skipping duplicate path", "url", item.Url)
+					continue
+				}
+
+				path = fmt.Sprintf("%s_%d", path, dupIdx)
+			}
+			dupePathMap[path] = dupIdx + 1
+		}
+
 		if _, ok := dirMap[path]; ok {
 			path = filepath.Join(path, "index")
 		}
@@ -76,18 +92,9 @@ func ExtractItems(rt *Root, out string) (err error) {
 			}
 		}
 
-		{
-			dupIdx, ok := dupePathMap[path]
-			if !ok {
-				dupIdx = 0
-			}
-			if dupIdx > 0 {
-				path = fmt.Sprintf("%s_%d", path, dupIdx)
-			}
-			dupePathMap[path] = dupIdx + 1
-		}
-
 		realOutPath := filepath.Join(out, path)
+
+		slog.Info(fmt.Sprintf("Extracting %s", item.Url))
 
 		if err := os.MkdirAll(filepath.Dir(realOutPath), 0777); err != nil {
 			slog.Error("Failed to create dir for item", "err", err, "url", item.Url)
