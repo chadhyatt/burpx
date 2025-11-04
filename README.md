@@ -20,6 +20,10 @@ USAGE: burpx [OPTION]...
     	Path to the Burp Suite XML sitemap export to extract (default "sitemap.xml")
   -o string
     	Base directory for extracted sitemap (default ".")
+  -only-2xx
+    	Only extract responses that have a 2xx response status
+  -only-get
+    	Only save responses from GET responses
 ```
 
 ## License

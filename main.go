@@ -12,6 +12,8 @@ var (
 	outDir = flag.String("o", ".", "Base directory for extracted sitemap")
 
 	shouldWriteDups = flag.Bool("dup", false, "Writes file paths with duplicate response entries with an _n suffix")
+	skipNonSuccess  = flag.Bool("only-2xx", false, "Only extract responses that have a 2xx response status")
+	skipNonGet      = flag.Bool("only-get", false, "Only save responses from GET responses")
 )
 
 func usage(exitCode int) {

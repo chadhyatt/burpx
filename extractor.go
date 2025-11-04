@@ -31,6 +31,14 @@ func ExtractItems(rt *Root, out string) (err error) {
 	}
 
 	for _, item := range rt.Items {
+		if *skipNonSuccess && item.Status < 200 || item.Status >= 299 {
+			slog.Info("Skipping non-2xx response status for item", "url", item.Url)
+			continue
+		} else if *skipNonGet && item.Method != "GET" {
+			slog.Info("Skipping non-GET response for item", "url", item.Url)
+			continue
+		}
+
 		var resp *http.Response
 		{
 			var respPayload []byte
