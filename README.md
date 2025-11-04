@@ -4,7 +4,7 @@ Tool for extracting a Burp Suite XML sitemap export to a directory (from `Target
 
 ## Install
 
-With a recent version of [Go](https://go.dev) installed and `~/go/bin` in your PATH, you can install or update burpx with `go update`:
+With a recent version of [Go](https://go.dev) installed and `~/go/bin` in your PATH, you can install or update burpx with `go install`:
 
 ```sh
 go install -v github.com/chadhyatt/burpx@latest
