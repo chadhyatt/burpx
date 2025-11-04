@@ -29,8 +29,13 @@ func ParentDirs(path string) []string {
 }
 
 func DefaultExtForContentType(ctype string) string {
-	if exts, err := mime.ExtensionsByType(ctype); err == nil && len(exts) > 0 {
-		return exts[0]
+	if exts, err := mime.ExtensionsByType(ctype); err == nil {
+		for _, ext := range exts {
+			if ext == ".htm" {
+				continue
+			}
+			return ext
+		}
 	}
 	return ""
 }
